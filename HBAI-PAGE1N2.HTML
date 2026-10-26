@@ -2,15 +2,18 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>AI导购实验-情境+伙伴对话</title>
+<style>
+*{box-sizing:border-box;}
+body{margin:0;background:#eeeeee;padding:8px 0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+</style>
 </head>
-<body style="margin:0;background:#eeeeee;padding:15px 0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;">
-
+<body>
 <!-- ========== 模块A：实验情境说明 初始显示 ========== -->
-<div id="scene-box" style="max-width:560px;margin:20px auto;padding:24px 20px;background:#f7f9fc;border-radius:16px;line-height:1.8;color:#222;transition:opacity 0.8s ease;">
-  <h3 style="text-align:center;margin-top:0;color:#1f3a5f;">实验情境说明</h3>
-  <p id="scene-text" style="font-size:16px;min-height:90px;opacity:0;transition:opacity 1.2s ease;">
+<div id="scene-box" style="max-width:560px;margin:8px auto;padding:14px 14px;background:#f7f9fc;border-radius:12px;line-height:1.6;color:#222;transition:opacity 0.8s ease;">
+  <h3 style="text-align:center;margin:4px 0 8px 0;color:#1f3a5f;font-size:16px;">实验情境说明</h3>
+  <p id="scene-text" style="font-size:14px;min-height:auto;margin:0;opacity:0;transition:opacity 1.2s ease;">
     您正在浏览一家绿色食品电商平台，使用“鲜到家”生鲜电商App购物。<br><br>
     今天您想为家人选购早餐牛奶，在牛奶频道看到一款<strong>绿色食品认证纯牛奶（250g×24盒）</strong>。
     同类普通纯牛奶（250g×24盒）的参考均价为<strong>45元</strong>。<br><br>
@@ -19,96 +22,99 @@
     请您设想自己正在做购买决策，并真实表达您的想法。
   </p>
   
-  <!-- 商品示意图 -->
-  <div id="img-wrap" style="text-align:center;margin:16px 0;opacity:0;transition:opacity 1.2s ease;">
-    <img src="https://www.laogaohome.top/i/9vNrlhDFXdVs4pb9kE3YmEdWbysh1KEyXP6TDwO3Geg" alt="A品牌绿色食品认证纯牛奶商品图" style="max-width:92%;max-height:300px;border-radius:10px;object-fit:contain;">
+  <!-- 商品示意图，降低最大高度 -->
+  <div id="img-wrap" style="text-align:center;margin:10px 0;opacity:0;transition:opacity 1.2s ease;">
+    <img src="https://www.laogaohome.top/i/9vNrlhDFXdVs4pb9kE3YmEdWbysh1KEyXP6TDwO3Geg" alt="A品牌绿色食品认证纯牛奶商品图" style="max-width:85%;max-height:180px;border-radius:8px;object-fit:contain;">
   </div>
 
-  <div id="scene-countdown-box" style="text-align:center;margin-top:10px;display:none;">
-    <p id="scene-countdown-text" style="font-size:14px;color:#555;">即将进入对话…</p>
-    <button id="scene-enter-btn" style="margin-top:10px;padding:10px 22px;background:#4096ff;color:#fff;border:none;border-radius:24px;font-size:15px;cursor:pointer;">
+  <div id="scene-countdown-box" style="text-align:center;margin-top:8px;display:none;">
+    <p id="scene-countdown-text" style="font-size:13px;color:#555;margin:4px 0;">即将进入对话…</p>
+    <button id="scene-enter-btn" style="margin-top:6px;padding:7px 16px;background:#4096ff;color:#fff;border:none;border-radius:20px;font-size:14px;cursor:pointer;">
       进入对话
     </button>
   </div>
 </div>
 
 <!-- ========== 模块B：伙伴AI对话 初始完全隐藏 ========== -->
-<div id="chat-box-wrap" style="display:none;max-width:420px;margin:12px auto;transition:opacity 0.8s ease;">
-<div style="border-radius:18px;overflow:hidden;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.08);">
-    <!-- 顶部标题栏 -->
-    <div style="background:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0f0f0;">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#4096ff,#74b3ff);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:600;">小鲜</div>
+<div id="chat-box-wrap" style="display:none;max-width:420px;margin:8px auto;transition:opacity 0.8s ease;">
+<div style="border-radius:12px;overflow:hidden;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);">
+    <!-- 顶部标题栏，压缩padding -->
+    <div style="background:#fff;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0f0f0;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#4096ff,#74b3ff);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;">小鲜</div>
         <div>
-          <div style="font-size:15px;font-weight:600;color:#222;">鲜到家 AI助手</div>
-          <div style="font-size:11px;color:#999;margin-top:2px;">在线 · 随时为您推荐</div>
+          <div style="font-size:14px;font-weight:600;color:#222;">鲜到家 AI助手</div>
+          <div style="font-size:10px;color:#999;margin-top:1px;">在线 · 随时为您推荐</div>
         </div>
       </div>
-      <div style="display:flex;gap:18px;color:#666;font-size:13px;">
+      <div style="display:flex;gap:14px;color:#666;font-size:12px;">
         <span>···</span>
       </div>
     </div>
-    <!-- 聊天内容区 -->
-    <div style="padding:14px;background:#f7f8fa;min-height:260px;">
+    <!-- 聊天内容区，缩小padding、min‑height -->
+    <div style="padding:10px;background:#f7f8fa;min-height:180px;">
       <!-- AI 开场白 【msg1】初始透明 -->
-      <div id="msg1" style="opacity:0;transition:opacity 0.7s ease;display:flex;gap:8px;margin-bottom:14px;align-items:flex-start;">
-        <div style="width:32px;height:32px;border-radius:50%;background:#eef4ff;display:flex;align-items:center;justify-content:center;font-size:12px;color:#4096ff;flex-shrink:0;font-weight:600;">AI</div>
-        <div style="background:#fff;border:1px solid #eef0f3;border-radius:0 14px 14px 14px;padding:11px 13px;max-width:75%;line-height:1.6;color:#222;font-size:14px;box-shadow:0 1px 2px rgba(0,0,0,.03);">
+      <div id="msg1" style="opacity:0;transition:opacity 0.7s ease;display:flex;gap:6px;margin-bottom:10px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#eef4ff;display:flex;align-items:center;justify-content:center;font-size:11px;color:#4096ff;flex-shrink:0;font-weight:600;">AI</div>
+        <div style="background:#fff;border:1px solid #eef0f3;border-radius:0 12px 12px 12px;padding:8px 10px;max-width:76%;line-height:1.5;color:#222;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.03);">
           嗨～我是鲜到家的AI买菜搭子“小鲜”。
         </div>
       </div>
       <!-- 用户消息 【msg2】初始透明 -->
-      <div id="msg2" style="opacity:0;transition:opacity 0.7s ease;display:flex;justify-content:flex-end;margin-bottom:14px;">
-        <div style="background:#4096ff;color:#fff;border-radius:14px 0 14px 14px;padding:11px 13px;max-width:75%;line-height:1.6;font-size:14px;box-shadow:0 1px 2px rgba(0,0,0,.04);">
+      <div id="msg2" style="opacity:0;transition:opacity 0.7s ease;display:flex;justify-content:flex-end;margin-bottom:10px;">
+        <div style="background:#4096ff;color:#fff;border-radius:12px 0 12px 12px;padding:8px 10px;max-width:76%;line-height:1.5;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.04);">
           帮我推荐款牛奶
         </div>
       </div>
-      <!-- AI 长回复 + 商品卡片 【msg3】初始透明 -->
-      <div id="msg3" style="opacity:0;transition:opacity 0.7s ease;display:flex;gap:8px;margin-bottom:14px;align-items:flex-start;">
-        <div style="width:32px;height:32px;border-radius:50%;background:#eef4ff;display:flex;align-items:center;justify-content:center;font-size:12px;color:#4096ff;flex-shrink:0;font-weight:600;">AI</div>
-        <div style="background:#fff;border:1px solid #eef0f3;border-radius:0 14px 14px 14px;padding:12px 13px;max-width:75%;line-height:1.7;color:#222;font-size:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          看你在挑早餐奶，我帮你看了一圈，这款绿色食品认证纯牛奶挺值得聊聊：<br><br>
-          它通过了<strong>中国绿色食品认证</strong>～奶牛吃的饲草料，种植过程中<strong>没有使用化学合成农药和化肥</strong>。最近一批检测里，抗生素残留和农药残留都没检出，咱们喝着更放心。<br> 每100ml含<strong>3.3g蛋白质</strong>，从产地到仓库全程冷链，早餐喝正合适。绿色养殖对土壤和水源更友好，选它也算是为环境出一份力呀。<br><br>
+      <!-- AI 长回复 + 商品卡片 【msg3】初始透明（已修正列表间距、删除多余br空行） -->
+      <div id="msg3" style="opacity:0;transition:opacity 0.7s ease;display:flex;gap:6px;margin-bottom:10px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#eef4ff;display:flex;align-items:center;justify-content:center;font-size:11px;color:#4096ff;flex-shrink:0;font-weight:600;">AI</div>
+        <div style="background:#fff;border:1px solid #eef0f3;border-radius:0 12px 12px 12px;padding:9px 10px;max-width:76%;line-height:1.5;color:#222;font-size:13px;box-shadow:0 1px 3px rgba(0,0,0,.04);">
+          看你在挑早餐奶，我帮你看了一圈，这款绿色食品认证纯牛奶挺值得聊聊：
+          <ul style="margin:6px 0 4px 0;padding-left:16px;padding-bottom:0;font-size:13px;line-height:1.5;">
+            <li>它通过了<strong>中国绿色食品认证</strong>～</li>
+            <li>奶牛吃的饲草料，种植过程中<strong>没有使用化学合成农药和化肥</strong>，咱们喝着更放心。</li>
+            <li>每<strong>100ml含3.3g蛋白质</strong>，从产地到仓库全程冷链，早餐喝正合适。</li>
+            <li><strong>绿色养殖</strong>对土壤和水源更友好，选它也算是为环境出一份力呀。</li>
+          </ul>
           我觉得它特别适合咱们家的早餐桌，要不要一起试试这款？
-          <!-- 商品卡片 -->
-          <div style="margin-top:12px;border:1px solid #eef0f3;border-radius:12px;overflow:hidden;background:#fbfcfe;">
-            <div style="display:flex;gap:10px;padding:10px;align-items:center;">
-            
-             <div style="width:58px;height:58px;border-radius:8px;overflow:hidden;flex-shrink:0;border:1px solid #dcf5e3;background:#fff;">
+          <!-- 商品卡片 缩小尺寸 -->
+          <div style="margin-top:8px;border:1px solid #eef0f3;border-radius:10px;overflow:hidden;background:#fbfcfe;">
+            <div style="display:flex;gap:8px;padding:8px;align-items:center;">
+             <div style="width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;border:1px solid #dcf5e3;background:#fff;">
              <img src="https://www.laogaohome.top/i/W876Y0Oz-F3wdK8pUINMjU5LtiNXi6cnYen3HPGM_x8" alt="绿色食品纯牛奶" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;">
              </div>
               <div style="flex:1;min-width:0;">
-                <div style="font-size:13px;font-weight:600;color:#222;">绿色食品认证纯牛奶</div>
-                <div style="font-size:12px;color:#888;margin-top:4px;">250g×24盒 · 早餐优选</div>
-                <div style="margin-top:6px;">
-                  <span style="display:inline-block;background:#e8f7ee;color:#2d7a3a;font-size:11px;padding:2px 7px;border-radius:10px;">绿色食品认证</span>
-                  <span style="display:inline-block;background:#eef4ff;color:#2f6fcc;font-size:11px;padding:2px 7px;border-radius:10px;margin-left:4px;">3.3g蛋白质</span>
+                <div style="font-size:12px;font-weight:600;color:#222;">绿色食品认证纯牛奶</div>
+                <div style="font-size:11px;color:#888;margin-top:2px;">250g×24盒 · 早餐优选</div>
+                <div style="margin-top:4px;">
+                  <span style="display:inline-block;background:#e8f7ee;color:#2d7a3a;font-size:10px;padding:1px 5px;border-radius:8px;">绿色食品认证</span>
+                  <span style="display:inline-block;background:#eef4ff;color:#2f6fcc;font-size:10px;padding:1px 5px;border-radius:8px;margin-left:3px;">3.3g蛋白质</span>
                 </div>
               </div>
             </div>
-            <div style="padding:0 10px 10px;">
-              <button style="width:100%;padding:7px 0;background:#4096ff;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:500;">加入购物车</button>
+            <div style="padding:0 8px 8px;">
+              <button style="width:100%;padding:5px 0;background:#4096ff;color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:500;">加入购物车</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- 底部输入栏 -->
-    <div style="padding:10px 12px;border-top:1px solid #f0f0f0;background:#fff;display:flex;gap:10px;align-items:center;">
-      <div style="flex:1;background:#f3f4f6;border-radius:20px;padding:9px 14px;font-size:14px;color:#bbb;">输入消息</div>
-      <button style="width:36px;height:36px;border-radius:50%;background:#4096ff;color:#fff;border:none;font-size:12px;">发送</button>
+    <!-- 底部输入栏 压缩高度 -->
+    <div style="padding:8px 10px;border-top:1px solid #f0f0f0;background:#fff;display:flex;gap:8px;align-items:center;">
+      <div style="flex:1;background:#f3f4f6;border-radius:16px;padding:7px 10px;font-size:12px;color:#bbb;">输入消息</div>
+      <button style="width:26px;height:26px;border-radius:50%;background:#4096ff;color:#fff;border:none;font-size:10px;">发送</button>
     </div>
 </div>
 
 <!-- 对话页倒计时模块 -->
-<div id="chat-countdown-box" style="max-width:420px;margin:14px auto;text-align:center;display:none;">
-  <p id="chat-countdown-text" style="font-size:14px;color:#555;">即将进入选择…</p>
-  <button id="chat-enter-btn" style="margin-top:10px;padding:10px 22px;background:#4096ff;color:#fff;border:none;border-radius:24px;font-size:15px;cursor:pointer;">
+<div id="chat-countdown-box" style="max-width:420px;margin:8px auto;text-align:center;display:none;">
+  <p id="chat-countdown-text" style="font-size:13px;color:#555;margin:4px 0;">即将进入选择…</p>
+  <button id="chat-enter-btn" style="margin-top:6px;padding:7px 16px;background:#4096ff;color:#fff;border:none;border-radius:20px;font-size:14px;cursor:pointer;">
     进入选择
   </button>
 </div>
 </div>
-
 
 <script>
 (function(){
@@ -121,7 +127,6 @@
     var sceneEnterBtn = document.getElementById('scene-enter-btn');
     var sceneCountdown = 15;
     var sceneTimer = null;
-
     //===== 对话页变量 =====
     const chatBoxWrap = document.getElementById('chat-box-wrap');
     const msg1 = document.getElementById('msg1');
@@ -132,16 +137,12 @@
     const chatEnterBtn = document.getElementById('chat-enter-btn');
     let chatCountdown = 15;
     let chatTimer = null;
-
-
     // -------- 情境页动画启动 --------
     setTimeout(function(){
         sceneText.style.opacity = '1';
         imgWrap.style.opacity = '1';
     }, 400);
-
     setTimeout(showSceneCountdown, 1400);
-
     // 情境页倒计时
     function showSceneCountdown(){
         sceneCountdownBox.style.display = 'block';
@@ -150,7 +151,6 @@
         setTimeout(function(){
             sceneCountdownBox.style.opacity = '1';
         },200);
-
         sceneCountdownText.textContent = sceneCountdown + ' 秒后自动进入对话…';
         sceneTimer = setInterval(function(){
             sceneCountdown--;
@@ -162,14 +162,11 @@
             }
         },1000);
     }
-
     // 点击按钮手动跳转对话
     sceneEnterBtn.addEventListener('click',function(){
         if(sceneTimer) clearInterval(sceneTimer);
         switchToChatPage();
     })
-
-
     //===== 页面切换函数：隐藏情境，显示对话，并且启动气泡时序动画 =====
     function switchToChatPage(){
         // 隐藏情境模块
@@ -179,7 +176,6 @@
             // 显示对话模块
             chatBoxWrap.style.display = 'block';
             chatBoxWrap.style.opacity = '1';
-
             // 启动伙伴AI气泡淡入时序（和原来时序完全一致）
             setTimeout(()=>{msg1.style.opacity = '1';},400);
             setTimeout(()=>{msg2.style.opacity = '1';},1600);
@@ -187,18 +183,14 @@
                 msg3.style.opacity = '1';
                 setTimeout(showChatCountdown,2000);
             },2800);
-
         },800);
     }
-
-
     // -----对话页倒计时-----
     function showChatCountdown(){
         chatCountdownBox.style.display = 'block';
         chatCountdownBox.style.opacity = '0';
         chatCountdownBox.style.transition = 'opacity 0.6s ease';
         setTimeout(()=>{chatCountdownBox.style.opacity = '1';},200);
-
         chatCountdownText.textContent = chatCountdown + ' 秒后自动进入选择…';
         chatTimer = setInterval(()=>{
             chatCountdown--;
@@ -206,18 +198,14 @@
             if(chatCountdown <=0){
                 clearInterval(chatTimer);
                 chatCountdownText.textContent = '正在进入…';
-                // 到这里：对话流程结束；若是问卷星，后续在这里需要被试手动点问卷星下一题
             }
         },1000);
     }
-
     chatEnterBtn.addEventListener('click',()=>{
         if(chatTimer) clearInterval(chatTimer);
         alert("对话阶段结束，请在问卷中继续作答");
     })
-
 })();
 </script>
-
 </body>
 </html>
